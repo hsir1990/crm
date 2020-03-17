@@ -1,0 +1,12 @@
+package com.itheima.crm.service;
+
+import com.itheima.crm.domain.User;
+
+//用户管理的实现类接口
+public interface UserService {
+
+	void regist(User user);
+
+	User login(User user);
+
+}
