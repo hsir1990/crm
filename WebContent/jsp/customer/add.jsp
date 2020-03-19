@@ -24,7 +24,7 @@ $(function(){
 		// 遍历json的数据:
 		$(data).each(function(i,n){
 			$("#cust_level").append("<option value='"+n.dict_id+"'>"+n.dict_item_name+"</option>");
-		});s
+		});
 	},"json");
 	$.post("${pageContext.request.contextPath }/baseDist_findByTypeCode.action",{"dict_type_code":"001"},function(data){
 		// 遍历json的数据:
@@ -39,7 +39,7 @@ $(function(){
 <BODY>
 	<FORM id=form1 name=form1
 		action="${pageContext.request.contextPath }/customer_save.action"
-		method=post>
+		method=post enctype="multipart/form-data">
 		
 
 		<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
@@ -117,7 +117,12 @@ $(function(){
 														style="WIDTH: 180px" maxLength=50 name="cust_mobile">
 								</td>
 							</TR>
-							
+							<TR>
+								<td>客户资质：</td>
+								<td colspan="3">
+									<input type="file" name="upload">
+								</td>
+							</TR>
 							
 							<tr>
 								<td rowspan=2>

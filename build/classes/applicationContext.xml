@@ -78,7 +78,7 @@
 	
 	
 	<!-- 配置字典管理的相关类 -->
-	<bean id="baseDistAction" class="com.itheima.crm.web.action.BaseDistAction">
+	<bean id="baseDistAction" class="com.itheima.crm.web.action.BaseDistAction" scope="prototype">
 		<property name="baseDistService" ref="baseDistService"/>
 	</bean>
 	<bean id="baseDistService" class="com.itheima.crm.service.impl.BaseDistServiceImpl">

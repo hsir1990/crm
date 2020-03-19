@@ -14,6 +14,7 @@
 		<property name="cust_level" column="cust_level"/> -->
 		<property name="cust_phone" column="cust_phone"/>
 		<property name="cust_mobile" column="cust_mobile"/>
+		<property name="cust_image" column="cust_image"/>
 		
 		<!-- 配置一对多，作为多方来配置 -->
 		<many-to-one name="baseDistSource" class="com.itheima.crm.domain.BaseDist" column="cust_source"/>
