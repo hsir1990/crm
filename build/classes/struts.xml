@@ -5,7 +5,8 @@
 <struts>
 	<!-- 配置Struts2的常量 -->
 	<constant name="struts.action.extension" value="action"/>
-	
+	<!-- 配置Struct2上传文件的总的最大值 -->
+	<constant name="structs.multipart.maxSize" value="5242880"/>
 	<package name="crm" extends="struts-default" namespace="/">
 		<action name="user_*" class="userAction" method="{1}">
 			<result name="login">/login.jsp</result>
@@ -15,8 +16,17 @@
 		<action name="customer_*" class="customerAction" method="{1}">
 			<result name="saveUI">/jsp/customer/add.jsp</result>
 			<result name="findAll">/jsp/customer/list.jsp</result>
+			<result name="editSuccess" >/jsp/customer/edit.jsp</result>
+			<result name="deleteSuccess" type="redirectAction">customer_findAll.action</result>
 			<!-- 需要重定向，否则报NullPointerException异常 -->
 			<result name="saveSuccess" type="redirectAction">customer_findAll.action</result>
+			<!-- 上传图片失败会报404  然后自动跳input ，可以显示错误信息 -->
+			<result name="input">/jsp/customer/add.jsp</result>
+			<!-- 配置单个文件上传的最大值 -->
+			<interceptor-ref name="defaultStack">
+				<param name="fileUpload.maximumSize">2097152</param>
+				<param name="fileUpload.allowedExtenions">.jpg, .png</param>
+			</interceptor-ref>
 		</action>
 		<action name="baseDist_*" class="baseDistAction" method="{1}">
 		</action>				

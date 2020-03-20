@@ -63,7 +63,20 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 		if(upload!=null) {
 			//文件上传
 			//设置文件上传的路径
-			String path = "/Users/dongmian/hsir/java/imgs";
+			String osName = System.getProperty("os.name");
+	        System.out.println(osName);
+	        String path=null;
+	        if (osName.startsWith("Mac OS")) {
+	        	//mac
+				path = "/Users/dongmian/hsir/java/imgs";
+	        } else if (osName.startsWith("Windows")) {
+	            // windows
+				path = "F:\\java\\imgs";
+	        } else {
+	            // unix or linux
+	        }
+			
+			
 			//一个目录下存放的相同的文件名：随即文件名
 			String uuidFileName = UploadUtils.getUuidFileName(uploadFileName);
 			//一个目录下存放的文件过多：目录分离
@@ -112,6 +125,35 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 		return "findAll";
 	}
 
+	//删除客户的方法
+	public String delete() {
+		//先查在删，才能删除级联操作
+		customer = customerService.findById(customer.getCust_id());
+		//删除图片
+		if(customer.getCust_image() != null) {
+			File file = new File(customer.getCust_image());
+			if(file.exists()) {
+				file.delete();
+			}
+		}
+		//删除客户
+		customerService.delete(customer);
+		return "deleteSuccess";
+	}
+	
+	//编辑客户方法
+	public String edit() {
+		//根据id查询，跳转页面，回显数据
+		customer = customerService.findById(customer.getCust_id());
+		//将customer传递到页面：
+		//两种方法：一种，手动压栈。二种，因为模型驱动的对象，默认在栈顶
+		//如果使用第一种方式：回显数据： <s:property value="cust_name" />
+//		ActionContext.getContext().getValueStack().push(customer);
+		//如果使用第二种方式： 回显数据：<s:property value="model.cust_name"/>
+		
+		//跳转页面
+		return "editSuccess";
+	}
 	
 
 }
