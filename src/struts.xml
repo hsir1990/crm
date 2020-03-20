@@ -6,7 +6,7 @@
 	<!-- 配置Struts2的常量 -->
 	<constant name="struts.action.extension" value="action"/>
 	<!-- 配置Struct2上传文件的总的最大值 -->
-	<contant name="structs.multipart.maxSize" vlaue="5242880"/>
+	<constant name="structs.multipart.maxSize" value="5242880"/>
 	<package name="crm" extends="struts-default" namespace="/">
 		<action name="user_*" class="userAction" method="{1}">
 			<result name="login">/login.jsp</result>
