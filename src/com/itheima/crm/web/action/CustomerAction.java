@@ -34,7 +34,6 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 		
 	//客户管理：跳转到添加页面的方法
 	public String saveUI() {
-		System.out.println("12------1");
 		return "saveUI";
 	}
 	//文件上传提供的三个属性：
@@ -94,7 +93,6 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 			customer.setCust_image(url + "/" +uuidFileName);
 		}
 		customerService.save(customer);
-		System.out.println("1--22--1");
 		return "saveSuccess";
 	}
 	
@@ -154,6 +152,53 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 		//跳转页面
 		return "editSuccess";
 	}
-	
+	//修改客户的方法
+	public String update() throws IOException {
+		//文件项是否已经选择：如果选择了，就删除原有文件，上传新文件。如果没有选择使用原有的就好
+//		upload是传过来的name值
+		if(upload != null) {
+			//已经选择了
+			//删除原有文件
+			String cust_image = customer.getCust_image();
+			if(cust_image != null && !"".equals(cust_image)) {
+				File file = new File(cust_image);
+				file.delete();
+			}
+			//文件上传
+			//设置文件上传的路径
+			String osName = System.getProperty("os.name");
+	        System.out.println(osName);
+	        String path=null;
+	        if (osName.startsWith("Mac OS")) {
+	        	//mac
+				path = "/Users/dongmian/hsir/java/imgs";
+	        } else if (osName.startsWith("Windows")) {
+	            // windows
+				path = "F:\\java\\imgs";
+	        } else {
+	            // unix or linux
+	        }
+			
+			
+			//一个目录下存放的相同的文件名：随即文件名
+			String uuidFileName = UploadUtils.getUuidFileName(uploadFileName);
+			//一个目录下存放的文件过多：目录分离
+			String realPath = UploadUtils.getPath(uuidFileName);
+			//创建目录
+			String url = path+realPath;
+			File file = new File(url);
+			if(!file.exists()) {
+				file.mkdirs();
+			}
+			
+			//文件上传
+			File dictFile = new File(url + "/" +uuidFileName);
+			FileUtils.copyFile(upload, dictFile);
+			customer.setCust_image(url + "/" +uuidFileName);
+		}
+
+		customerService.update(customer);
+		return "updateSuccess";
+	}
 
 }

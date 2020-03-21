@@ -17,6 +17,7 @@
 			<result name="saveUI">/jsp/customer/add.jsp</result>
 			<result name="findAll">/jsp/customer/list.jsp</result>
 			<result name="editSuccess" >/jsp/customer/edit.jsp</result>
+			<result name="updateSuccess" type="redirectAction">customer_findAll.action</result>
 			<result name="deleteSuccess" type="redirectAction">customer_findAll.action</result>
 			<!-- 需要重定向，否则报NullPointerException异常 -->
 			<result name="saveSuccess" type="redirectAction">customer_findAll.action</result>

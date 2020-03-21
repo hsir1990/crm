@@ -20,18 +20,24 @@ $(function(){
 		$(data).each(function(i, n){
 			$("#cust_source").append("<option value='"+n.dict_id+"'>"+n.dict_item_name+"</option>");
 		})
+		//使用EL表达式
+		$("#cust_source option[value='${model.baseDistSource.dict_id}']").prop("selected",true)
 	},"json")
 	$.post("${pageContext.request.contextPath }/baseDist_findByTypeCode.action",{"dict_type_code":"006"},function(data){
 		// 遍历json的数据:
 		$(data).each(function(i,n){
 			$("#cust_level").append("<option value='"+n.dict_id+"'>"+n.dict_item_name+"</option>");
 		});
+		$("#cust_level option[value='${model.baseDistLevel.dict_id}']").prop("selected",true)
+
 	},"json");
 	$.post("${pageContext.request.contextPath }/baseDist_findByTypeCode.action",{"dict_type_code":"001"},function(data){
 		// 遍历json的数据:
 		$(data).each(function(i,n){
 			$("#cust_industry").append("<option value='"+n.dict_id+"'>"+n.dict_item_name+"</option>");
 		});
+		$("#cust_industry option[value='${model.baseDistIndustry.dict_id}']").prop("selected",true)
+
 	},"json");
 	
 })
@@ -40,8 +46,9 @@ $(function(){
 <BODY>
 <s:actionerror/>
 <s:fielderror/>
-	<s:form id="form1" name="form1" method="post" enctype="multipart/form-data" theme="simple" action="">
-		
+	<s:form id="form1" name="form1" method="post" enctype="multipart/form-data" theme="simple" action="customer_update" namespace="/">
+		<s:hidden name="cust_id" value="%{model.cust_id}"/>
+		<s:hidden name="cust_image" value="%{model.cust_image}"/>
 
 		<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
 			<TBODY>
@@ -76,10 +83,12 @@ $(function(){
 							<TR>
 								<td>客户名称：</td>
 								<td>
-								<!-- s:textfield默认是嵌套表格的 -->
-								<!--<s:textfield cssClass="textbox" cssStyle="WIDTH: 180px" maxLength=50 name="custName"/>-->
-								<!-- 或者直接用model的方法-->
-								<s:textfield cssClass="textbox" cssStyle="WIDTH: 180px" maxLength=50 name="model.custName"/>
+								<%--:textfield默认是嵌套表格的 -->
+								<s:textfield cssClass="textbox" cssStyle="WIDTH: 180px" maxLength=50 name="custName"/>
+								或者直接用model的方法 --%>
+								<%-- <s:textfield cssClass="textbox" cssStyle="WIDTH: 180px" maxLength=50 name="model.custName"/> --%>
+								<s:textfield cssClass="textbox" cssStyle="WIDTH: 180px" maxLength="50" 
+									name="cust_name" value="%{model.cust_name}"/>
 								</td>
 								<td>客户级别 ：</td>
 								<td>
@@ -111,13 +120,11 @@ $(function(){
 								
 								<td>固定电话 ：</td>
 								<td>
-								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="cust_phone">
+								<s:textfield cssClass="textbox" cssStyle="WIDTH: 180px" maxLength="50" name="cust_phone" value="%{model.cust_phone}"/>
 								</td>
 								<td>移动电话 ：</td>
 								<td>
-								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="cust_mobile">
+								<s:textfield cssClass="textbox" cssStyle="WIDTH: 180px" maxLength="50" name="cust_mobile" value="%{model.cust_mobile}"/>
 								</td>
 							</TR>
 							<TR>
