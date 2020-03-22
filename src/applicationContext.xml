@@ -44,6 +44,7 @@
 				<value>com/itheima/crm/domain/User.hbm.xml</value>
 				<value>com/itheima/crm/domain/Customer.hbm.xml</value>
 				<value>com/itheima/crm/domain/BaseDist.hbm.xml</value>
+				<value>com/itheima/crm/domain/LinkMan.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -86,6 +87,16 @@
 	</bean>
 	<bean id="baseDistDao" class="com.itheima.crm.dao.impl.BaseDistDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<!-- 配置联系人的相关类 -->
+	<bean id="linkManAction" class="com.itheima.crm.web.action.LinkManAction" scope="prototype">
+		<property name="linkManService" ref="linkManService"/>
+	</bean>
+	<bean id="linkManService" class="com.itheima.crm.service.LinkManServiceImpl">
+		<property name="linkManDao" ref="linkManDao"/>
+	</bean>
+	<bean id="linkManDao" class="com.itheima.crm.dao.impl.LinkManDaoImpl">
+	 	<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 	
 	<!-- 配置事务管理器 -->

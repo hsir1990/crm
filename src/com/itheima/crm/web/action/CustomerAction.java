@@ -6,6 +6,7 @@ import java.io.IOException;
 import org.apache.commons.fileupload.FileUpload;
 import org.apache.commons.io.FileUtils;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 
 import com.itheima.crm.domain.Customer;
 import com.itheima.crm.domain.PageBean;
@@ -115,6 +116,27 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 		//	接受分页参数
 		//最好使用DetachedCriteria对象（条件查询带分页）
 		DetachedCriteria  detachedCriteria = DetachedCriteria.forClass(Customer.class);
+		//设置条件（在web层设置条件）
+		if(customer.getCust_name() != null) {
+			detachedCriteria.add(Restrictions.like("cust_name", "%"+customer.getCust_name()+"%"));
+		}
+		if(customer.getBaseDistSource() != null) {
+			if(customer.getBaseDistSource().getDict_id() != null && !"".equals(customer.getBaseDistSource().getDict_id())) {
+				detachedCriteria.add(Restrictions.eq("baseDistSource.dict_id", customer.getBaseDistSource().getDict_id()));
+			}
+		}
+		if(customer.getBaseDistLevel() != null) {
+			if(customer.getBaseDistLevel().getDict_id() != null && !"".equals(customer.getBaseDistLevel().getDict_id())) {
+				detachedCriteria.add(Restrictions.eq("baseDistLevel.dict_id", customer.getBaseDistLevel().getDict_id()));
+			}
+		}
+		if(customer.getBaseDistIndustry() != null) {
+			if(customer.getBaseDistIndustry().getDict_id() != null && !"".equals(customer.getBaseDistIndustry().getDict_id())) {
+				detachedCriteria.add(Restrictions.eq("baseDistIndustry.dict_id", customer.getBaseDistIndustry().getDict_id()));
+			}
+		}
+
+		
 		//调用业务层查询
 		PageBean<Customer> pageBean = customerService.findByPage(detachedCriteria, currPage, pageSize);
 		

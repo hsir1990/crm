@@ -1,5 +1,7 @@
 package com.itheima.crm.domain;
 
+import java.util.HashSet;
+import java.util.Set;
 
 //CREATE TABLE `cst_customer` (
 //		  `cust_id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '客户编号(主键)',
@@ -22,14 +24,22 @@ public class Customer {
 	private String cust_image;
 	
 	
-		//一对多，对多方进行添加
+	//一对多，对多方进行添加
 	private BaseDist baseDistSource;
 	private BaseDist baseDistIndustry;
 	private BaseDist baseDistLevel;
 	
 	
+	//一个客户可以有多个联系人
+	private Set<LinkMan> linkMans = new HashSet<LinkMan>();
 	
 	
+	public Set<LinkMan> getLinkMan() {
+		return linkMans;
+	}
+	public void setLinkMan(Set<LinkMan> linkMans) {
+		this.linkMans = linkMans;
+	}
 	public BaseDist getBaseDistSource() {
 		return baseDistSource;
 	}

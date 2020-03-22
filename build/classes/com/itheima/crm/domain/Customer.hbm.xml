@@ -20,5 +20,10 @@
 		<many-to-one name="baseDistSource" class="com.itheima.crm.domain.BaseDist" column="cust_source"/>
 		<many-to-one name="baseDistIndustry" class="com.itheima.crm.domain.BaseDist" column="cust_industry"/>
 		<many-to-one name="baseDistLevel" class="com.itheima.crm.domain.BaseDist" column="cust_level"/>
+		<!-- 匹配与联系人关系映射 -->
+		<set name="linkMans">
+			<key column="lkm_cust_id"/>
+			<one-to-many class="com.itheima.crm.domain.LinkMan"/>
+		</set>
 	</class>
 </hibernate-mapping>
