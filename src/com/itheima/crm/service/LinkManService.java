@@ -9,4 +9,6 @@ public interface LinkManService {
 
 	PageBean<LinkMan> findAll(DetachedCriteria detachedCriteria, Integer currPage, Integer pageSize);
 
+	void save(LinkMan linkMan);
+
 }

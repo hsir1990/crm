@@ -1,9 +1,13 @@
 package com.itheima.crm.web.action;
 
+import java.util.List;
+
 import org.hibernate.criterion.DetachedCriteria;
 
+import com.itheima.crm.domain.Customer;
 import com.itheima.crm.domain.LinkMan;
 import com.itheima.crm.domain.PageBean;
+import com.itheima.crm.service.CustomerService;
 import com.itheima.crm.service.LinkManService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -25,6 +29,13 @@ public class LinkManAction extends ActionSupport implements ModelDriven<LinkMan>
 
 	public void setLinkManService(LinkManService linkManService) {
 		this.linkManService = linkManService;
+	}
+	//注入客户管理的Service
+	private CustomerService customerService;
+	
+
+	public void setCustomerService(CustomerService customerService) {
+		this.customerService = customerService;
 	}
 
 	//分页参数
@@ -54,5 +65,19 @@ public class LinkManAction extends ActionSupport implements ModelDriven<LinkMan>
 		PageBean<LinkMan> pageBean = linkManService.findAll(detachedCriteria, currPage, pageSize);
 		ActionContext.getContext().getValueStack().push(pageBean);
 		return "findAll";
+	}
+	//保存联系人
+	public String saveUI() {
+		//查询所有的客户，要调用客户业务层的代码，所以要调用注入客户管理
+		List<Customer> list= customerService.findAll();
+		//对象用push，list用 set   将list集合保存到值栈中
+		ActionContext.getContext().getValueStack().set("list",list);
+		return "saveUI";
+	}
+	//保存客户的方法：save
+	public String save() {
+		//调用业务层保存
+		linkManService.save(linkMan);
+		return "saveSuccess";
 	}
 }

@@ -36,6 +36,8 @@
 		<!-- 配置联系人查询 	-->
 		<action name="linkMan_*" class="linkManAction" method="{1}">
 			<result name="findAll">/jsp/linkman/list.jsp</result>
+			<result name="saveUI">/jsp/linkman/add.jsp</result>
+			<result name="saveSuccess" type="redirectAction">linkMan_findAll.action</result>
 		</action>		
 	</package>
 </struts>

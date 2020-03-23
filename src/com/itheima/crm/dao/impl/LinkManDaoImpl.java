@@ -33,4 +33,9 @@ public class LinkManDaoImpl extends HibernateDaoSupport implements LinkManDao{
 		return list;
 	}
 
+	@Override
+	public void save(LinkMan linkMan) {
+		this.getHibernateTemplate().save(linkMan);
+	}
+
 }

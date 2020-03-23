@@ -37,4 +37,9 @@ public class LinkManServiceImpl implements LinkManService {
 		pageBean.setList(list);
 		return pageBean;
 	}
+
+	@Override
+	public void save(LinkMan linkMan) {
+		linkManDao.save(linkMan);
+	}
 }

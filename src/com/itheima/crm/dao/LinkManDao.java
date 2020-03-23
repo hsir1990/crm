@@ -12,4 +12,6 @@ public interface LinkManDao {
 
 	List<LinkMan> findByPage(DetachedCriteria detachedCriteria, Integer begin, Integer pageSize);
 
+	void save(LinkMan linkMan);
+
 }
