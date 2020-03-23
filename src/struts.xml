@@ -8,11 +8,12 @@
 	<!-- 配置Struct2上传文件的总的最大值 -->
 	<constant name="structs.multipart.maxSize" value="5242880"/>
 	<package name="crm" extends="struts-default" namespace="/">
+		<!-- 配置管理员查询 -->
 		<action name="user_*" class="userAction" method="{1}">
 			<result name="login">/login.jsp</result>
 			<result name="success" type="redirect">/index.jsp</result>
 		</action>
-	
+		<!-- 配置客户管理查询 -->
 		<action name="customer_*" class="customerAction" method="{1}">
 			<result name="saveUI">/jsp/customer/add.jsp</result>
 			<result name="findAll">/jsp/customer/list.jsp</result>
@@ -29,7 +30,12 @@
 				<param name="fileUpload.allowedExtenions">.jpg, .png</param>
 			</interceptor-ref>
 		</action>
+		<!-- 配置字典查询 -->
 		<action name="baseDist_*" class="baseDistAction" method="{1}">
-		</action>				
+		</action>	
+		<!-- 配置联系人查询 -->	
+		<action name="linkMan_*" class="linkManAction" method="{1}">
+			<result name="findAll">/jsp/linkMan/list.jsp</result>
+		</action>		
 	</package>
 </struts>

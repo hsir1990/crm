@@ -84,24 +84,31 @@
 													<TD>性别</TD>
 													<TD>办公电话</TD>
 													<TD>手机</TD>
+													<TD>邮箱</TD>
+													<TD>QQ</TD>
+													<TD>职位</TD>
+													<TD>所属客户</TD>
 													<TD>操作</TD>
 												</TR>
-												<c:forEach items="${list }" var="linkman">
-												<TR
-													style="FONT-WEIGHT: normal; FONT-STYLE: normal; BACKGROUND-COLOR: white; TEXT-DECORATION: none">
-													<TD>${linkman.lkmName }</TD>
-													<TD>${linkman.lkmGender }</TD>
-													<TD>${linkman.lkmPhone }</TD>
-													<TD>${linkman.lkmMobile }</TD>
-													
-													<TD>
-													<a href="${pageContext.request.contextPath }/linkmanServlet?method=edit&lkmId=${linkman.lkmId}">修改</a>
-													&nbsp;&nbsp;
-													<a href="${pageContext.request.contextPath }/linkmanServlet?method=delete&lkmId=${linkman.lkmId}">删除</a>
-													</TD>
-												</TR>
-												
-												</c:forEach>
+												<s:iterator value="list">
+													<TR
+														style="FONT-WEIGHT: normal; FONT-STYLE: normal; BACKGROUND-COLOR: white; TEXT-DECORATION: none">
+														<TD><s:property value="lkm_name" /></TD>
+														<TD><s:property value="lkm_gender" /></TD>
+														<TD><s:property value="lkm_phone" /></TD>
+														<TD><s:property value="lkm_mobile" /></TD>
+														<TD><s:property value="lkm_email" /></TD>
+														<TD><s:property value="lkm_qq" /></TD>
+														<TD><s:property value="lkm_position" /></TD>
+														<TD><s:property value="customer.cust_name" /></TD>
+														
+														<TD>
+														<a href="${pageContext.request.contextPath }">修改</a>
+														&nbsp;&nbsp;
+														<a href="${pageContext.request.contextPath }">删除</a>
+														</TD>
+													</TR>
+												</s:iterator>
 
 											</TBODY>
 										</TABLE>
