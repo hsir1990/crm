@@ -34,10 +34,11 @@ public class Customer {
 	private Set<LinkMan> linkMans = new HashSet<LinkMan>();
 	
 	
-	public Set<LinkMan> getLinkMan() {
+	
+	public Set<LinkMan> getLinkMans() {
 		return linkMans;
 	}
-	public void setLinkMan(Set<LinkMan> linkMans) {
+	public void setLinkMans(Set<LinkMan> linkMans) {
 		this.linkMans = linkMans;
 	}
 	public BaseDist getBaseDistSource() {

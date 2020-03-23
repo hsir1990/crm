@@ -33,9 +33,9 @@
 		<!-- 配置字典查询 -->
 		<action name="baseDist_*" class="baseDistAction" method="{1}">
 		</action>	
-		<!-- 配置联系人查询 -->	
+		<!-- 配置联系人查询 	-->
 		<action name="linkMan_*" class="linkManAction" method="{1}">
-			<result name="findAll">/jsp/linkMan/list.jsp</result>
+			<result name="findAll">/jsp/linkman/list.jsp</result>
 		</action>		
 	</package>
 </struts>

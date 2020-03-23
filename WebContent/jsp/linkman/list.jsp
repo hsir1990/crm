@@ -1,5 +1,6 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="/struts-tags" prefix="s" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,7 +24,7 @@
 </HEAD>
 <BODY>
 	<FORM id="customerForm" name="customerForm"
-		action="${pageContext.request.contextPath }/linkmanServlet?method=list"
+		action="${pageContext.request.contextPath }/linkMan_findAll.action"
 		method=post>
 		
 		<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
@@ -119,19 +120,34 @@
 									<TD><SPAN id=pagelink>
 											<DIV
 												style="LINE-HEIGHT: 20px; HEIGHT: 20px; TEXT-ALIGN: right">
-												共[<B>${total}</B>]条记录,[<B>${totalPage}</B>]页
+												共[<B><s:property value="totalCount"/></B>]条记录,[<B><s:property value="totalPage"/></B>]页
 												,每页显示
-												<select name="pageSize">
+												<select name="pageSize" onchange="to_page()">
 												
-												<option value="1" <c:if test="${pageSize==1 }">selected</c:if>>1</option>
-												<option value="30" <c:if test="${pageSize==30 }">selected</c:if>>30</option>
+												<option value="3" <s:if test="pageSize==3"> selected</s:if>>3</option>
+												<option value="5" <s:if test="pageSize==5"> selected</s:if>>5</option>
+												<option value="10" <s:if test="pageSize==10"> selected</s:if>>10</option>
 												</select>
 												条
-												[<A href="javascript:to_page(${page-1})">前一页</A>]
-												<B>${page}</B>
-												[<A href="javascript:to_page(${page+1})">后一页</A>] 
+												<s:if test="currPage!=1">
+												[<A href="javascript:to_page(<s:property value='1'/>)">首页</A>]
+												[<A href="javascript:to_page(<s:property value='currPage-1'/>)">前一页</A>]
+												</s:if>&nbsp;&nbsp;&nbsp;&nbsp;
+												<s:iterator var="i" begin="1" end="totalPage">
+													<s:if test="#i==currPage">
+														<s:property value="#i"/>
+													</s:if>
+													<s:else>
+													<A href="javascript:to_page(<s:property value='#i'/>)"><s:property value="#i"/></A>
+													</s:else>
+												</s:iterator>
+																								&nbsp;&nbsp;&nbsp;
+												<s:if test="currPage != totalPage">
+												[<A href="javascript:to_page(<s:property value='currPage+1'/>)">后一页</A>] 
+												[<A href="javascript:to_page(<s:property value='totalPage'/>)">首页</A>]
+												</s:if>
 												到
-												<input type="text" size="3" id="page" name="page" />
+												<input type="text" size="3" id="page" name="currPage" />
 												页
 												
 												<input type="button" value="Go" onclick="to_page()"/>
