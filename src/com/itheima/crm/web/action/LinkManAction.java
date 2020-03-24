@@ -3,6 +3,7 @@ package com.itheima.crm.web.action;
 import java.util.List;
 
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 
 import com.itheima.crm.domain.Customer;
 import com.itheima.crm.domain.LinkMan;
@@ -61,6 +62,15 @@ public class LinkManAction extends ActionSupport implements ModelDriven<LinkMan>
 		//创建离线条件查询
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(LinkMan.class);
 		//设置条件
+		if(linkMan.getLkm_name() != null) {
+			//设置按名称查询
+			detachedCriteria.add(Restrictions.like("lkm_name", "%"+linkMan.getLkm_name()+"%"));
+		}
+		//设置性别条件
+		if(linkMan.getLkm_gender() != null && !"".equals(linkMan.getLkm_gender())) {
+			detachedCriteria.add(Restrictions.eq("lkm_gender", linkMan.getLkm_gender()));
+		}
+		
 		//调用业务
 		PageBean<LinkMan> pageBean = linkManService.findAll(detachedCriteria, currPage, pageSize);
 		ActionContext.getContext().getValueStack().push(pageBean);
@@ -79,5 +89,23 @@ public class LinkManAction extends ActionSupport implements ModelDriven<LinkMan>
 		//调用业务层保存
 		linkManService.save(linkMan);
 		return "saveSuccess";
+	}
+	//跳转到编辑页面的方法：edit
+	public String edit() {
+		//查询某个联系人，查询所有的用户
+		//查询所有客户：
+		List<Customer> list = customerService.findAll();
+		//根据id查询联系人：
+		linkMan = linkManService.findById(linkMan.getLkm_id());
+		//将list和linkMan的对象带到页面上：
+		ActionContext.getContext().getValueStack().set("list",list);
+		//将对象的值存入到值栈
+		ActionContext.getContext().getValueStack().push(linkMan);
+		return "editSuccess";
+	}
+	//修改联系人的方法：update
+	public String update() {
+		linkManService.update(linkMan);
+		return "updateSuccess";
 	}
 }

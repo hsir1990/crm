@@ -62,9 +62,13 @@
 											<TBODY>
 												<TR>
 													<TD>联系人名称：</TD>
-													<TD><INPUT class=textbox id=sChannel2
-														style="WIDTH: 80px" maxLength=50 name="lkmName"></TD>
-													
+													<TD>
+														<s:textfield  name="lkm_name" maxLength="50" cssClass="textbox" cssStyle="WIDTH: 80px"/>
+													</TD>
+													<TD>联系人性别：</TD>
+													<TD>
+														<s:select   name="lkm_gender" list="#{'1':'男', '2':'女' }" headerKey="" headerValue="--请选择--"></s:select>
+													</TD>
 													<TD><INPUT class=button id=sButton2 type=submit
 														value=" 筛选 " name=sButton2></TD>
 												</TR>
@@ -96,11 +100,10 @@
 														style="FONT-WEIGHT: normal; FONT-STYLE: normal; BACKGROUND-COLOR: white; TEXT-DECORATION: none">
 														<TD><s:property value="lkm_name" /></TD>
 														<TD>
-														<s:property value="lkm_gender" />
-														
 															<s:if test='lkm_gender =="1"'>
 															男
 															</s:if>
+															<!-- '2'单字符用单引号，双引号代表字符串 -->
 															<s:elseif test='lkm_gender =="2"'>
 															女
 															</s:elseif>
@@ -113,7 +116,7 @@
 														<TD><s:property value="customer.cust_name" /></TD>
 														
 														<TD>
-														<a href="${pageContext.request.contextPath }">修改</a>
+														<a href="${pageContext.request.contextPath }/linkMan_edit.action?lkm_id=<s:property value="lkm_id"/>">修改</a>
 														&nbsp;&nbsp;
 														<a href="${pageContext.request.contextPath }">删除</a>
 														</TD>

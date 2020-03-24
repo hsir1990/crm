@@ -20,8 +20,9 @@
 		<many-to-one name="baseDistSource" class="com.itheima.crm.domain.BaseDist" column="cust_source"/>
 		<many-to-one name="baseDistIndustry" class="com.itheima.crm.domain.BaseDist" column="cust_industry"/>
 		<many-to-one name="baseDistLevel" class="com.itheima.crm.domain.BaseDist" column="cust_level"/>
-		<!-- 匹配与联系人关系映射 -->
-		<set name="linkMans">
+		<!-- 匹配与联系人关系映射      cascade="delete"代表级联删除      一的一方有外键维护权，inverse="true"是放弃的意思，让多的一方自己去维护-->
+		<!-- 因为在修改客户的时候，没有查询联系人的集合，当点击修改，修改客户（修改客户所关联联系人）因为联系人的集合是空，所以将外键置为null -->
+		<set name="linkMans" cascade="delete" inverse="true">
 			<key column="lkm_cust_id"/>
 			<one-to-many class="com.itheima.crm.domain.LinkMan"/>
 		</set>

@@ -42,4 +42,15 @@ public class LinkManServiceImpl implements LinkManService {
 	public void save(LinkMan linkMan) {
 		linkManDao.save(linkMan);
 	}
+
+	@Override
+	public LinkMan findById(Long lkm_id) {
+		
+		return linkManDao.findById(lkm_id);
+	}
+
+	@Override
+	public void update(LinkMan linkMan) {
+		linkManDao.update(linkMan);
+	}
 }
