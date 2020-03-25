@@ -95,19 +95,19 @@ $(function(){
 														<TD>客户来源：</TD>
 													<TD>
 														<select id="cust_source" name="baseDistSource.dict_id">
-															<option>---</option>
+															<option></option>
 														</select>
 													</TD>
 														<TD>客户级别：</TD>
 													<TD>
 														<select id="cust_level" name="baseDistLevel.dict_id">
-															<option>---</option>
+															<option></option>
 														</select>
 													</TD>
 														<TD>客户所属行业：</TD>
 													<TD>
 														<select id="cust_industry" name="baseDistIndustry.dict_id">
-															<option>---</option>
+															<option></option>
 														</select>
 													</TD>
 													

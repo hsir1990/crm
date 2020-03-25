@@ -111,16 +111,19 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 	public void setPageSize(Integer pageSize) {
 		this.pageSize = pageSize;
 	}
+	
 	public String findAll() {
 	
 		//	接受分页参数
 		//最好使用DetachedCriteria对象（条件查询带分页）
 		DetachedCriteria  detachedCriteria = DetachedCriteria.forClass(Customer.class);
 		//设置条件（在web层设置条件）
-		if(customer.getCust_name() != null) {
+		if(customer.getCust_name() != null&& !"".equals(customer.getCust_name())) {
 			detachedCriteria.add(Restrictions.like("cust_name", "%"+customer.getCust_name()+"%"));
 		}
+		//多级情况需要判断了一级在判断一级
 		if(customer.getBaseDistSource() != null) {
+			System.out.println(customer.getBaseDistSource().getDict_id());
 			if(customer.getBaseDistSource().getDict_id() != null && !"".equals(customer.getBaseDistSource().getDict_id())) {
 				detachedCriteria.add(Restrictions.eq("baseDistSource.dict_id", customer.getBaseDistSource().getDict_id()));
 			}
@@ -135,8 +138,6 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 				detachedCriteria.add(Restrictions.eq("baseDistIndustry.dict_id", customer.getBaseDistIndustry().getDict_id()));
 			}
 		}
-
-		
 		//调用业务层查询
 		PageBean<Customer> pageBean = customerService.findByPage(detachedCriteria, currPage, pageSize);
 		

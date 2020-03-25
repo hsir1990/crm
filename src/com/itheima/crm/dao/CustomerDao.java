@@ -7,8 +7,13 @@ import org.hibernate.criterion.DetachedCriteria;
 import com.itheima.crm.domain.Customer;
 
 public interface CustomerDao extends BaseDao<Customer>{
-
+//public interface CustomerDao{
 //	void save(Customer customer);
+//	
+//	void delete(Customer customer);
+//
+//	void update(Customer customer);
+//
 //
 //	Integer findCount(DetachedCriteria detachedCriteria);
 //
@@ -16,9 +21,6 @@ public interface CustomerDao extends BaseDao<Customer>{
 //
 //	Customer findById(Long cust_id);
 //
-//	void delete(Customer customer);
-//
-//	void update(Customer customer);
 //
 //	List<Customer> findAll();
 
