@@ -93,3 +93,5 @@ buildNumber.properties
 
 .svn
 
+.DS_Store
+	build/classes/com/
