@@ -1,5 +1,7 @@
 package com.itheima.crm.service.impl;
 
+import java.util.List;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import com.itheima.crm.dao.UserDao;
@@ -35,6 +37,12 @@ public class UserServiceImpl implements UserService {
 		
 		//调用Dao
 		return userDao.login(user);	
+	}
+
+	@Override
+	public List<User> findAll() {
+		
+		return userDao.findAll();
 	}
 
 }

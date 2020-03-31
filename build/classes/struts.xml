@@ -41,5 +41,11 @@
 			<result name="editSuccess">/jsp/linkman/edit.jsp</result>
 			<result name="updateSuccess" type="redirectAction">linkMan_findAll.action</result>
 		</action>		
+		<!-- 客户拜访记录的Action的配置 -->
+		<action name="saleVisit_*" class="saleVisitAction" method="{1}">
+			<result name="findAll">/jsp/salevisit/list.jsp</result>
+			<result name="saveUI">/jsp/salevisit/add.jsp</result>
+			<result name="saveSuccess" type="redirectAction">saleVisit_findAll.action</result>
+		</action>
 	</package>
 </struts>

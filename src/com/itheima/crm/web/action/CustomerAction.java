@@ -2,9 +2,11 @@ package com.itheima.crm.web.action;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.commons.fileupload.FileUpload;
 import org.apache.commons.io.FileUtils;
+import org.apache.struts2.ServletActionContext;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
@@ -15,6 +17,9 @@ import com.itheima.crm.service.utils.UploadUtils;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JsonConfig;
 
 public class CustomerAction extends ActionSupport implements ModelDriven<Customer> {
 
@@ -224,4 +229,16 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 		return "updateSuccess";
 	}
 
+	
+	public String  findAllCustomer() throws IOException {
+		List<Customer> list = customerService.findAll();
+		//将list转成JSON
+		JsonConfig jsonConfig = new JsonConfig();
+		jsonConfig.setExcludes(new String[] {"linkMans","baseDistSource","baseDistLevel","baseDistIndustry"});
+		//转成JSON
+		JSONArray jsonArray = JSONArray.fromObject(list, jsonConfig);
+		ServletActionContext.getResponse().setContentType("text/html;charset=UTF-8");
+		ServletActionContext.getResponse().getWriter().println(jsonArray.toString());
+		return NONE;
+	}
 }

@@ -61,7 +61,7 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDao<T> {
 	@Override
 	public List<T> findAll() {
 		
-		return (List<T>) this.getHibernateTemplate().find("form" + clazz.getSimpleName());
+		return (List<T>) this.getHibernateTemplate().find("from " + clazz.getSimpleName());
 	}
 	@Override
 	public Integer findCount(DetachedCriteria detachedCriteria) {

@@ -13,6 +13,14 @@
 	http://www.springframework.org/schema/tx 
 	http://www.springframework.org/schema/tx/spring-tx.xsd">
 	
+	<!-- 开启属性注入的注解 -->
+	<!-- 使用IOC的注解开发，配置组件扫描（哪些包下的类使用IOC的注解） -->
+	<!--扫描是为了扫描类上的注解 -->
+	<!-- <context:component-scan base-package="com.itheima.spring"/> -->
+	
+	<!--在没有扫描的情况下，使用属性注入的注解：@Resource @Value @Autowired @Qulifier -->
+	<context:annotation-config/>
+	
 	<!-- 引入外部属性文件=============================== -->
 	<context:property-placeholder location="classpath:jdbc.properties"/>
 	
@@ -45,6 +53,7 @@
 				<value>com/itheima/crm/domain/Customer.hbm.xml</value>
 				<value>com/itheima/crm/domain/BaseDist.hbm.xml</value>
 				<value>com/itheima/crm/domain/LinkMan.hbm.xml</value>
+				<value>com/itheima/crm/domain/SaleVisit.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -99,6 +108,15 @@
 	<bean id="linkManDao" class="com.itheima.crm.dao.impl.LinkManDaoImpl">
 	 	<property name="sessionFactory" ref="sessionFactory"/>
 	</bean> 
+	<!-- 配置客户拜访记录管理相关类 -->
+	<bean id="saleVisitAction" class="com.itheima.crm.web.action.SaleVisitAction" scope="prototype" >	
+	</bean>
+	<bean id="saleVisitService" class="com.itheima.crm.service.impl.SaleVisitServiceImpl">
+	</bean>
+	<bean id="saleVisitDao" class="com.itheima.crm.dao.impl.SaleVisitDaoImpl">
+		<!-- dao中不能对sessionFactory 进行注解，所以还要用命令行的格式来写 -->
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
 	<!-- 配置事务管理器 -->
 	<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory"/>
