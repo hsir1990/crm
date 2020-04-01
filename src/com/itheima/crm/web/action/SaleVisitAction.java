@@ -63,6 +63,11 @@ public class SaleVisitAction extends ActionSupport implements ModelDriven<SaleVi
 	}
 
 
+	public Date getVisit_end_time() {
+		return visit_end_time;
+	}
+
+
 	//查询拜访记录列表的方法：findAll
 	public String findAll() {
 		//创建离线的条件查询对象
@@ -74,7 +79,7 @@ public class SaleVisitAction extends ActionSupport implements ModelDriven<SaleVi
 		}
 		if(visit_end_time != null) {
 			//小于等于le
-			detachedCriteria.add(Restrictions.le("visit_end_time",visit_end_time));
+			detachedCriteria.add(Restrictions.le("visit_time",visit_end_time));
 		}
 		
 		

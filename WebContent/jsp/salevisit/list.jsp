@@ -76,11 +76,15 @@ $(document).ready(function(){
 												<TR>
 													<TD>拜访时间：从</TD>
 													<TD>
-														<s:textfield id="visit_time"  name="visit_time" maxLength="50" cssClass="textbox" cssStyle="WIDTH: 80px"/>
+														<input type="text" id="visit_time" name="visit_time" readonly="readonly" value="<s:date name="visit_time" format="yyyy-MM-dd"/>"/>
+														<!--用这种可能就不回显了 <s:textfield id="visit_time"  name="visit_time" maxLength="50" cssClass="textbox" cssStyle="WIDTH: 80px"/> -->
+														
 													</TD>
 													<TD>到</TD>
 													<TD>
-														<s:textfield id="visit_end_time"  name="visit_end_time" maxLength="50" cssClass="textbox" cssStyle="WIDTH: 80px"/>
+														<input type="text" id="visit_end_time" name="visit_end_time" readonly="readonly" value="<s:date name="visit_end_time" format="yyyy-MM-dd"/>"/>
+														<!-- <s:textfield id="visit_end_time"  name="visit_end_time" maxLength="50" cssClass="textbox" cssStyle="WIDTH: 80px"/> -->
+														
 													</TD>
 													<TD><INPUT class=button id=sButton2 type=submit
 														value=" 筛选 " name=sButton2></TD>
